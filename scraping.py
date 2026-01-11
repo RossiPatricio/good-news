@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-
 def scrap_cnn():
     try: 
         url = 'https://edition.cnn.com/'
@@ -141,7 +140,7 @@ def scrap_cbs():
     try:
         response = requests.get('https://www.cbsnews.com/')
         soup = BeautifulSoup(response.content, 'html.parser')
-
+        print(soup.prettify)
         lista_de_diccionarios= []
 
         contents = soup.find_all('div', class_='item__title-wrapper')
@@ -172,7 +171,7 @@ def scrap_infobae():
         response = requests.get(url)
         soup = BeautifulSoup(response.content, 'html.parser')
 
-        elements = soup.find_all('h2', class_='story-card-hl headline-link')
+        elements = soup.find_all('h2', class_='story-card-hl headline-link headline')
         for e in elements:
             title = e.text.strip()
             enlace_padre = e.find_parent('a')
