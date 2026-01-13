@@ -80,11 +80,11 @@ for portal, scraper in portals.items():
 
 def top_news(keys):
     top_news = []
-    seen_titles = set() # esto me ayudo la ia, no entiendo todavia
+    seen_titles = set()  # esto me ayudo la ia, no entiendo todavia
 
     for articles in results.values():
         for article in articles:
-            title = article['title'].casefold()
+            title = article["title"].casefold()
 
             if title in seen_titles:
                 continue
@@ -92,10 +92,11 @@ def top_news(keys):
             for key in keys:
                 if key.casefold() in title:
                     top_news.append(article)
-                    seen_titles.add(title) # add
+                    seen_titles.add(title)  # add
                     break  # evita repetir por otra keyword
 
-    results['top_news'] = top_news
+    results["top_news"] = top_news
+
 
 top_news(keys_1)
 

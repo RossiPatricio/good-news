@@ -51,31 +51,90 @@ def scrap_times():
 
 def scrap_nbc():
     try:
-        url = 'https://www.nbcnews.com/latest-stories/'
-        url2 = 'https://www.nbcnews.com/'
         lista_de_diccionarios = []
 
-        response2 = requests.get(url2)
-        soup2 = BeautifulSoup(response2.content, 'html.parser')
-        news_1 = soup2.find_all('h2', class_='multistoryline__headline founders-cond fw6 lead')
-        for element in news_1:
-            titulo2= element.text
-            link2= element.a['href']
-            lista_de_diccionarios.append({'title': titulo2, 'link': link2, 'portal': 'nbc'})  
+        ## PRINCIPAL
+        
+        headlines = "https://www.nbcnews.com/"
+        response = requests.get(headlines)
+        soup = BeautifulSoup(response.content, "html.parser")
+        
+        # Portada
 
-        news_2 = soup2.find_all('h2', class_='storyline__headline founders-cond fw6 large')
-        for element in news_2:
-            titulo2= element.text
-            link2= element.a['href']
-            lista_de_diccionarios.append({'title': titulo2, 'link': link2, 'portal': 'nbc'})
+        portada = soup.find("h2", class_="storyline__headline founders-cond fw6 lead")
+        title = portada.text
+        link = portada.a['href']
+        lista_de_diccionarios.append({"title": title, "link": link, "image_path": "", "portal": "nbc"})
 
-        response = requests.get(url)
-        soup = BeautifulSoup(response.content, 'html.parser')
-        content = soup.find_all('h2', class_='multistoryline__headline founders-cond fw6 large noBottomSpace')
-        for element in content:
-            titulo= element.text
-            link= element.a['href']
-            lista_de_diccionarios.append({'title': titulo, 'link': link, 'portal': 'nbc'})  
+        
+        #Primera pagina
+        
+        first_news = soup.find_all(
+            "h2", class_="storyline__headline founders-cond fw6 large"
+        )     
+        
+        vistos = set()
+
+        for article in first_news:
+
+            link = article.a["href"]
+
+            if link in vistos:
+                continue
+
+            vistos.add(link)
+            title = article.text
+            link = article.a['href'] 
+            lista_de_diccionarios.append({"title": title, "link": link, "image_path": "", "portal": "nbc"})        
+        
+
+        # Latest news
+
+        latest_news = soup.find_all("h2", class_="styles_teaseTitle__ClSV0")
+
+        for article in latest_news:
+            title = article.text
+            link = article.a["href"]
+            lista_de_diccionarios.append(
+                {"title": title, "link": link, "image_path": "", "portal": "nbc"}
+            )
+            
+        print("Latest:", len(latest_news))
+
+        
+        ## WORLD NEWS:
+
+        world_news = "https://www.nbcnews.com/world"
+        response_2 = requests.get(world_news)
+        soup_2 = BeautifulSoup(response_2.content, "html.parser")
+
+       
+        # More world news
+
+        news_3 = soup_2.find_all("h2", class_="wide-tease-item__headline")
+
+        for article in news_3:
+            enlace_padre = article.find_parent("a")
+            title = article.text
+            link = enlace_padre["href"]
+            lista_de_diccionarios.append(
+                {"title": title, "link": link, "image_path": "", "portal": "nbc"}
+            )
+
+        print("More world news:", len(news_3))
+
+        # Latest world news
+
+        news_2 = soup_2.find_all("h2", class_="styles_headline__Gk6tj")
+
+        for article in news_2:
+            title = article.text
+            link = article.a["href"]
+            lista_de_diccionarios.append(
+                {"title": title, "link": link, "image_path": "", "portal": "nbc"}
+            )
+
+        print("Latest world news:", len(news_2))
 
         return lista_de_diccionarios
     except Exception as e:
