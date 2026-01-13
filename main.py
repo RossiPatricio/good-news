@@ -16,7 +16,6 @@ keys_1 = [
     "Messi",
     "2026",
     "programming",
-    "movie",
     "Putin",
     "Nirvana",
     "Michael Jackson",
@@ -25,30 +24,23 @@ keys_1 = [
     "Quilmes",
     "Oasis",
     "Zelensky",
-    "Kirchner",
     "Musk",
     "Burton",
     "Cobain",
     "Ukraine",
     "Potter",
     "Rowling",
-    "Webb",
     "SpaceX",
     "NASA",
     "Depp",
     "Ucrania",
-    "Poe",
     "chess",
     "Magnus Carlsen",
     "argentino",
     "Argentina",
     "Argentinian",
     "tim burton",
-    "gothic",
-    "church",
     "jesus",
-    "yisus",
-    "ia",
     "programming",
     "python",
     "skateboarding",
@@ -58,24 +50,18 @@ keys_1 = [
     "specie",
     "species",
     "Egypt",
-    "discovery",
-    "death",
-    "died",
-    "die",
-    "2026 world cup",
+    "world cup",
     "war",
     "openai",
     "chatgpt",
     "deepseek",
     "grok",
-    "ia china",
-    "rowling",
+    "ai",
     "harry potter",
     "daniel radcliffe",
     "rupert grint",
     "emma watson",
-    "harry potter hbo",
-    "harry potter series",
+    "harry potter",
 ]
 
 
@@ -94,11 +80,21 @@ for portal, scraper in portals.items():
 
 def top_news(keys):
     top_news = []
+    seen_titles = set() # esto me ayudo la ia, no entiendo todavia
+
     for articles in results.values():
         for article in articles:
+            title = article['title'].casefold()
+
+            if title in seen_titles:
+                continue
+
             for key in keys:
-                if key.casefold() in article['title'].casefold() :
+                if key.casefold() in title:
                     top_news.append(article)
+                    seen_titles.add(title) # add
+                    break  # evita repetir por otra keyword
+
     results['top_news'] = top_news
 
 top_news(keys_1)
@@ -111,4 +107,3 @@ for portal, article in results.items():
         html_generator(article, portal)
     except:
         continue
-
