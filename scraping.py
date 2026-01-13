@@ -86,7 +86,7 @@ def scrap_nbc():
             title = article.text
             link = article.a['href'] 
             lista_de_diccionarios.append({"title": title, "link": link, "image_path": "", "portal": "nbc"})        
-        
+
 
         # Latest news
 
@@ -98,9 +98,6 @@ def scrap_nbc():
             lista_de_diccionarios.append(
                 {"title": title, "link": link, "image_path": "", "portal": "nbc"}
             )
-            
-        print("Latest:", len(latest_news))
-
         
         ## WORLD NEWS:
 
@@ -121,8 +118,6 @@ def scrap_nbc():
                 {"title": title, "link": link, "image_path": "", "portal": "nbc"}
             )
 
-        print("More world news:", len(news_3))
-
         # Latest world news
 
         news_2 = soup_2.find_all("h2", class_="styles_headline__Gk6tj")
@@ -133,8 +128,6 @@ def scrap_nbc():
             lista_de_diccionarios.append(
                 {"title": title, "link": link, "image_path": "", "portal": "nbc"}
             )
-
-        print("Latest world news:", len(news_2))
 
         return lista_de_diccionarios
     except Exception as e:
@@ -199,7 +192,6 @@ def scrap_cbs():
     try:
         response = requests.get('https://www.cbsnews.com/')
         soup = BeautifulSoup(response.content, 'html.parser')
-        print(soup.prettify)
         lista_de_diccionarios= []
 
         contents = soup.find_all('div', class_='item__title-wrapper')

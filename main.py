@@ -71,6 +71,7 @@ results = {}
 
 for portal, scraper in portals.items():
     try:
+        print(f'Scraping {portal}')
         results[portal] = scraper()
     except:
         continue

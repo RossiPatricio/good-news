@@ -1,0 +1,36 @@
+Infobae scraper no esta funcionando
+
+top news not working
+
+logica poco clara del main
+
+
+ya deberia tener diagrama de flujo
+
+duplicados nbc
+
+imagenes infobae
+
+
+SCRAPERS  →  results (raw)
+                ↓
+           top_news(results)
+                ↓
+         results["top_news"]
+                ↓
+          render HTML
+
+
+
++portals
+sumar noticias tipo reddit?
+
+test
+
+database feed
+
+
+
+
+
+procedural → OOP
