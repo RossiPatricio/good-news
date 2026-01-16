@@ -27,12 +27,12 @@ keys_1 = [
     "Musk",
     "Burton",
     "Cobain",
-    "Ukraine",
     "Potter",
     "Rowling",
     "SpaceX",
     "NASA",
     "Depp",
+    "Ukraine",
     "Ucrania",
     "chess",
     "Magnus Carlsen",
@@ -62,8 +62,8 @@ keys_1 = [
     "rupert grint",
     "emma watson",
     "harry potter",
+    "Simpsons"
 ]
-
 
 # 1: Scrapeo cada portal y lo guardo en results:
 
@@ -81,7 +81,7 @@ for portal, scraper in portals.items():
 
 def top_news(keys):
     top_news = []
-    seen_titles = set()  # esto me ayudo la ia, no entiendo todavia
+    seen_titles = set()  # El set() se usa para almacenar títulos de noticias ya procesados y evitar duplicados. Es una estructura de datos que garantiza que cada elemento sea único y permite búsquedas muy rápidas.
 
     for articles in results.values():
         for article in articles:
@@ -93,7 +93,7 @@ def top_news(keys):
             for key in keys:
                 if key.casefold() in title:
                     top_news.append(article)
-                    seen_titles.add(title)  # add
+                    seen_titles.add(title)  # agrega el titulo al set  seen_titles
                     break  # evita repetir por otra keyword
 
     results["top_news"] = top_news

@@ -53,7 +53,7 @@ def scrap_nbc():
     try:
         lista_de_diccionarios = []
 
-        ## PRINCIPAL
+        # PRINCIPAL
         
         headlines = "https://www.nbcnews.com/"
         response = requests.get(headlines)
@@ -67,7 +67,7 @@ def scrap_nbc():
         lista_de_diccionarios.append({"title": title, "link": link, "image_path": "", "portal": "nbc"})
 
         
-        #Primera pagina
+        # Primera pagina
         
         first_news = soup.find_all(
             "h2", class_="storyline__headline founders-cond fw6 large"
@@ -99,7 +99,7 @@ def scrap_nbc():
                 {"title": title, "link": link, "image_path": "", "portal": "nbc"}
             )
         
-        ## WORLD NEWS:
+        # WORLD NEWS:
 
         world_news = "https://www.nbcnews.com/world"
         response_2 = requests.get(world_news)
@@ -155,23 +155,9 @@ def scrap_clarin():
         return e
 
 def cnn_español():
+    lista_de_diccionarios = []
     try:
-        url = 'https://cnnespanol.cnn.com/entretenimiento/cine'
-        lista_de_diccionarios = []
-
-        response = requests.get(url)
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        content2 = soup.find_all('span', class_='container__headline-text')
-        for e in content2:
-            titulo = e.text.strip()
-            enlace_padre = e.find_parent('a')
-            if enlace_padre:
-                link = url + enlace_padre['href']
-                lista_de_diccionarios.append({'title': titulo, 'link': link, 'portal': 'cnn'})   
-
         url = 'https://cnnespanol.cnn.com/'
-        lista_de_diccionarios = []
 
         response2 = requests.get(url)
         soup2 = BeautifulSoup(response2.content, 'html.parser')

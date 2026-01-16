@@ -34,3 +34,24 @@ database feed
 
 
 procedural → OOP
+
+
+
+
+
+
+
+mvp? para darle cierre
+
+No te muestra portales, los usa para alimenetar base de datos de noticias, en tiempo real
+(la funcion principal pasaria a ser las top news)
+filtra noticias segun palabras clave
+entras a home y ves las noticias y sus fuentes
+hay un sistema de rankin para que las mas importantes esten primero
+
+- base de datos
+- oop
+- hosting
+
+y el frontend?
+
