@@ -62,7 +62,7 @@ keys_1 = [
     "rupert grint",
     "emma watson",
     "harry potter",
-    "Simpsons"
+    "Simpsons",
 ]
 
 # 1: Scrapeo cada portal y lo guardo en results:
